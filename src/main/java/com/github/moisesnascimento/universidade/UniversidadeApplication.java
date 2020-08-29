@@ -8,9 +8,9 @@ import org.springframework.context.annotation.Profile;
 @SpringBootApplication
 @ComponentScan(basePackages = {
 		// aqui estamos dizendo para o spring buscar os componentes nesse pacote
-		"com.github.moisesnascimento.universidade.application",
+		"com.github.moisesnascimento.universidade.*",
 })
-@Profile("h2")
+@Profile("mysql")
 public class UniversidadeApplication {
 
 	public static void main(String[] args) {
