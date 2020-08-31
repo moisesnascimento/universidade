@@ -25,7 +25,7 @@ public class ProfessorController {
 	}
 
 	@GetMapping(path = "/mostrar_professor")
-	public String mostrarProfessor() {
+	public Iterable<Professor> listarProfessor() {
 		return professorService.mostrarProfessor();
 	}
 }
