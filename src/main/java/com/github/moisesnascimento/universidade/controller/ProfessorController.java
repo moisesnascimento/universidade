@@ -3,6 +3,7 @@ package com.github.moisesnascimento.universidade.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +22,16 @@ public class ProfessorController {
 	@PostMapping(path = "/inserir_professor")
 	public ResponseEntity<Professor> cadastrarProfessor(Professor professor) {
 		professorService.salvarProfessor(professor);
-		return ResponseEntity.status(HttpStatus.OK).build();
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
 	@GetMapping(path = "/mostrar_professor")
 	public Iterable<Professor> listarProfessor() {
 		return professorService.mostrarProfessor();
+	}
+
+	@DeleteMapping(path = "/deletar_professor")
+	public void deletarProfessor(int id) {
+		professorService.deletarProfessor(id);
 	}
 }
