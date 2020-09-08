@@ -22,6 +22,7 @@ public class ProfessorService {
 		return professorRepository.findAll();
 	}
 
+
 	public ResponseEntity<Integer> deletarProfessor(int id) {
 		if (!professorRepository.existsById(id)) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(id);
