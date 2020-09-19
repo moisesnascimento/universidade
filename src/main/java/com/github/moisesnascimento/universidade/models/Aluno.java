@@ -27,6 +27,10 @@ public class Aluno {
 		this.notaPeriodo2 = notaPeriodo2;
 		this.notaPeriodo3 = notaPeriodo3;
 	}
+	
+	public Aluno() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public String getNome() {
 		return nome;

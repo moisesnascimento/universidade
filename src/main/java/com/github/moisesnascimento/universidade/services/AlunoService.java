@@ -3,8 +3,6 @@ package com.github.moisesnascimento.universidade.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.github.moisesnascimento.universidade.exceptions.AlunoNaoEncontradoExeption;
@@ -33,17 +31,17 @@ public class AlunoService {
 		Aluno aluno = a.get();
 		return (aluno.getNotaPeriodo1() + aluno.getNotaPeriodo2() +
 				aluno.getNotaPeriodo3()) / 3;
-		
-		
 	}
 
-	public ResponseEntity<Integer> deletarAluno(int id) {
+	public void deletarAluno(int id) {
 		if (alunoRepository.existsById(id)) {
 			alunoRepository.deleteById(id);
-			return ResponseEntity.status(HttpStatus.OK).build();
 		}
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(id);
 	}
 	
-	
+	public void renomearAluno(int id, String nome) {
+		Optional<Aluno> a = alunoRepository.findById(id);
+		Aluno aluno = a.get();
+		aluno.setNome(nome);
+	}
 }
