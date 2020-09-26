@@ -20,15 +20,15 @@ public class ProfessorController {
 	@Autowired
 	ProfessorService professorService;
 
+	@GetMapping()
+	public Iterable<Professor> listarProfessor() {
+		return professorService.mostrarProfessor();
+	}
+	
 	@PostMapping()
 	public ResponseEntity<Professor> cadastrarProfessor(Professor professor) {
 		professorService.salvarProfessor(professor);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
-	}
-
-	@GetMapping()
-	public Iterable<Professor> listarProfessor() {
-		return professorService.mostrarProfessor();
 	}
 
 	@DeleteMapping(path = "{id}")

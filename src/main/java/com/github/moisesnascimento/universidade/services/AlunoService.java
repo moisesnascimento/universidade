@@ -24,24 +24,51 @@ public class AlunoService {
 	}
 
 	public double calcularMedia(int id) throws AlunoNaoEncontradoExeption {
-		Optional<Aluno> a = alunoRepository.findById(id);
-		if (a.isEmpty()) {
+		Optional<Aluno> alunoOptional = alunoRepository.findById(id);
+		if (alunoOptional.isEmpty()) {
 			throw new AlunoNaoEncontradoExeption(id);
 		}
-		Aluno aluno = a.get();
-		return (aluno.getNotaPeriodo1() + aluno.getNotaPeriodo2() +
-				aluno.getNotaPeriodo3()) / 3;
+		Aluno aluno = alunoOptional.get();
+		return (aluno.getNotaPeriodo1() + aluno.getNotaPeriodo2() + aluno.getNotaPeriodo3()) / 3;
 	}
 
-	public void deletarAluno(int id) {
-		if (alunoRepository.existsById(id)) {
-			alunoRepository.deleteById(id);
+	public void deletarAluno(int id) throws AlunoNaoEncontradoExeption {
+		if (!alunoRepository.existsById(id)) {
+			throw new AlunoNaoEncontradoExeption(id);
 		}
+		alunoRepository.deleteById(id);
 	}
-	
-	public void renomearAluno(int id, String nome) {
-		Optional<Aluno> a = alunoRepository.findById(id);
-		Aluno aluno = a.get();
+
+	public void atualizarAluno(int id, Aluno aluno) throws AlunoNaoEncontradoExeption {
+		Optional<Aluno> alunoOptional = alunoRepository.findById(id);
+		if (alunoOptional.isEmpty()) {
+			throw new AlunoNaoEncontradoExeption(id);
+		}
+		Aluno alun = alunoOptional.get();
+		alun.setNome(aluno.getNome());
+		alun.setIdade(aluno.getIdade());
+		alun.setNotaPeriodo1(aluno.getNotaPeriodo1());
+		alun.setNotaPeriodo2(aluno.getNotaPeriodo2());
+		alun.setNotaPeriodo3(aluno.getNotaPeriodo3());
+		alunoRepository.save(alun);
+	}
+
+	public Aluno retornaAluno(int id) throws AlunoNaoEncontradoExeption {
+		Optional<Aluno> alunoOptional = alunoRepository.findById(id);
+		if (alunoOptional.isEmpty()) {
+			throw new AlunoNaoEncontradoExeption(id);
+		}
+		Aluno aluno = alunoOptional.get();
+		return aluno;
+	}
+
+	public void alterarMome(int id, String nome) throws AlunoNaoEncontradoExeption {
+		Optional<Aluno> alunoOptional = alunoRepository.findById(id);
+		if (alunoOptional.isEmpty()) {
+			throw new AlunoNaoEncontradoExeption(id);
+		}
+		Aluno aluno = alunoOptional.get();
 		aluno.setNome(nome);
+		alunoRepository.save(aluno);
 	}
 }

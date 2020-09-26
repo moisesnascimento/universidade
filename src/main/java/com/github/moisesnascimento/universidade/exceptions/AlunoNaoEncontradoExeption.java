@@ -4,7 +4,6 @@ package com.github.moisesnascimento.universidade.exceptions;
 public class AlunoNaoEncontradoExeption extends Exception {
 
 	public AlunoNaoEncontradoExeption(int id) {
-		// TODO Auto-generated constructor stub
+		System.out.println("Aluno nao encontrado " + id);
 	}
-
 }
